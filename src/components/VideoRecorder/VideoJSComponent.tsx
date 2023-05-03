@@ -11,11 +11,15 @@ import "videojs-record/dist/css/videojs.record.css";
 // eslint-disable-next-line no-unused-vars
 import Record from "videojs-record";
 import { useEffect, useRef, version } from "react";
+import Player from "video.js/dist/types/player";
 
-export const VideoJSComponent = (props: any) => {
-  const videoRef = useRef<any>(null);
-  const playerRef = useRef<any>(null);
-  const { options, onReady } = props;
+interface Props {
+  options: Record<string, any>;
+  onReady: (player: Player) => void;
+}
+export const VideoJSComponent = ({ options, onReady }: Props) => {
+  const videoRef = useRef<HTMLDivElement>(null);
+  const playerRef = useRef<Player>();
 
   useEffect(() => {
     // Make sure Video.js player is only initialized once
@@ -24,6 +28,12 @@ export const VideoJSComponent = (props: any) => {
       const videoElement = document.createElement("video-js");
 
       videoElement.className = "video-js vjs-default-skin";
+
+      if (!videoRef.current) {
+        // Return early if no video ref
+        return;
+      }
+
       videoRef.current.appendChild(videoElement);
 
       const player = (playerRef.current = videojs(videoElement, options, () => {
@@ -57,7 +67,7 @@ export const VideoJSComponent = (props: any) => {
     return () => {
       if (player && !player.isDisposed()) {
         player.dispose();
-        playerRef.current = null;
+        playerRef.current = undefined;
       }
     };
   }, [playerRef]);

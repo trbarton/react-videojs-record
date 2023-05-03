@@ -2,9 +2,10 @@ import React from "react";
 import "./VideoRecorder.css";
 import VideoJSComponent from "./VideoJSComponent";
 import { useRef } from "react";
+import Player from "video.js/dist/types/player";
 
 export default function Wrapper() {
-  const playerRef = useRef<any>(null);
+  const playerRef = useRef<Player>();
   const videoJsOptions = {
     controls: true,
     bigPlayButton: false,
@@ -47,34 +48,39 @@ export default function Wrapper() {
   };
 
   const handlePlayerReady = (player: any) => {
-    playerRef.current = player;
+    try {
+      playerRef.current = player;
 
-    // handle player events
-    // device is ready
-    player.on("deviceReady", () => {
-      console.log("device is ready!");
-    });
+      // handle player events
+      // device is ready
+      player.on("deviceReady", () => {
+        console.log("device is ready!");
+      });
 
-    // user clicked the record button and started recording
-    player.on("startRecord", () => {
-      console.log("started recording!");
-    });
+      // user clicked the record button and started recording
+      player.on("startRecord", () => {
+        console.log("started recording!");
+      });
 
-    // user completed recording and stream is available
-    player.on("finishRecord", () => {
-      // recordedData is a blob object containing the recorded data that
-      // can be downloaded by the user, stored on server etc.
-      console.log("finished recording: ", player.recordedData);
-    });
+      // user completed recording and stream is available
+      player.on("finishRecord", () => {
+        // recordedData is a blob object containing the recorded data that
+        // can be downloaded by the user, stored on server etc.
+        console.log("finished recording: ", player.recordedData);
+      });
 
-    // error handling
-    player.on("error", (element: any, error: any) => {
-      console.warn(error);
-    });
+      // error handling
+      player.on("error", (element: any, error: any) => {
+        console.warn(error);
+      });
 
-    player.on("deviceError", () => {
-      console.error("device error:", player.deviceErrorCode);
-    });
+      player.on("deviceError", () => {
+        console.error("device error:", player.deviceErrorCode);
+      });
+    } catch (error: any) {
+      console.error("Something went wrong while getting player ready");
+      console.error(error);
+    }
   };
 
   return (
