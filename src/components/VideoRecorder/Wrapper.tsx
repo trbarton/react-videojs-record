@@ -4,7 +4,7 @@ import VideoJSComponent from "./VideoJSComponent";
 import { useRef } from "react";
 
 export default function Wrapper() {
-  const playerRef = useRef(null);
+  const playerRef = useRef<any>(null);
   const videoJsOptions = {
     controls: true,
     bigPlayButton: false,

@@ -1,9 +1,9 @@
 {
   "name": "@trbarton/react-videojs-record",
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com/trbarton/react-videojs-record"
+    "registry": "https://npm.pkg.github.com/trbarton"
   },
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A simple template for a custom React component library",
   "scripts": {
     "rollup": "rollup -c",
