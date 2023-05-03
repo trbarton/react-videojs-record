@@ -1,7 +1,7 @@
 {
-  "name": "@YOUR_GITHUB_USERNAME/YOUR_REPOSITORY_NAME",
+  "name": "@trbarton/react-videojs-record",
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com/YOUR_REPOSITORY_NAME"
+    "registry": "https://npm.pkg.github.com/trbarton/react-videojs-record"
   },
   "version": "0.1.0",
   "description": "A simple template for a custom React component library",
@@ -32,6 +32,7 @@
     "@testing-library/react": "^13.3.0",
     "@types/jest": "^28.1.6",
     "@types/react": "^18.0.15",
+    "@types/recordrtc": "^5.6.11",
     "babel-jest": "^27.3.1",
     "babel-loader": "^8.2.3",
     "css-loader": "^6.5.1",
@@ -53,5 +54,10 @@
   "files": [
     "dist"
   ],
-  "types": "dist/index.d.ts"
+  "types": "dist/index.d.ts",
+  "dependencies": {
+    "recordrtc": "^5.6.2",
+    "video.js": "^8.3.0",
+    "videojs-record": "^4.6.0"
+  }
 }

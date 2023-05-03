@@ -1,0 +1,4 @@
+/* change player background color */
+.App video-js {
+  background-color: #000000;
+}
